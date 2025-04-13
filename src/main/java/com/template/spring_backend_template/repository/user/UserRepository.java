@@ -3,7 +3,6 @@ package com.template.spring_backend_template.repository.user;
 import com.template.spring_backend_template.domain.user.User;
 import com.template.spring_backend_template.repository.AbstractRepository;
 import com.template.spring_backend_template.repository.user.mapper.UserRowMapper;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
