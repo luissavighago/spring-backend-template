@@ -19,16 +19,12 @@ public class TokenService {
     private String secret;
 
     public String generateToken(User user) {
-        try {
-            Algorithm algorithm = Algorithm.HMAC256(secret);
-            return JWT.create()
-                    .withIssuer("spring-backend-template")
-                    .withSubject(user.getUsername())
-                    .withExpiresAt(generateExpirationDate())
-                    .sign(algorithm);
-        } catch (JWTCreationException exception) {
-            throw new RuntimeException("Error generating token", exception);
-        }
+        Algorithm algorithm = Algorithm.HMAC256(secret);
+        return JWT.create()
+                .withIssuer("spring-backend-template")
+                .withSubject(user.getUsername())
+                .withExpiresAt(generateExpirationDate())
+                .sign(algorithm);
     }
 
     public String validateToken(String token) {

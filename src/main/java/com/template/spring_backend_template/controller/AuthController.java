@@ -1,7 +1,9 @@
 package com.template.spring_backend_template.controller;
 
-import com.template.spring_backend_template.domain.auth.AuthRequest;
-import com.template.spring_backend_template.domain.auth.RegisterRequest;
+import com.template.spring_backend_template.domain.RestResponse;
+import com.template.spring_backend_template.domain.auth.request.AuthRequest;
+import com.template.spring_backend_template.domain.auth.response.AuthResponse;
+import com.template.spring_backend_template.domain.auth.request.RegisterRequest;
 import com.template.spring_backend_template.service.auth.AuthService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,16 +21,20 @@ public class AuthController {
     private AuthService authService;
 
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody @Valid AuthRequest authRequest) {
+    public ResponseEntity<RestResponse> login(@RequestBody @Valid AuthRequest authRequest) {
 
-        String token = authService.login(authRequest.login(), authRequest.password());
-        return ResponseEntity.ok(token);
+        AuthResponse authResponse = authService.login(authRequest.login(), authRequest.password());
+        return ResponseEntity.ok(
+            new RestResponse(true, "Login successful", authResponse)
+        );
     }
 
     @PostMapping("/register")
-    public ResponseEntity register(@RequestBody @Valid RegisterRequest registerRequest) {
+    public ResponseEntity<RestResponse> register(@RequestBody @Valid RegisterRequest registerRequest) {
 
         authService.register(registerRequest);
-        return ResponseEntity.ok("Register successful");
+        return ResponseEntity.ok(
+            new RestResponse(true, "User registered successfully", null)
+        );
     }
 }

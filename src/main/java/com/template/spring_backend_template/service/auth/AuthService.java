@@ -1,8 +1,10 @@
 package com.template.spring_backend_template.service.auth;
 
-import com.template.spring_backend_template.domain.auth.RegisterRequest;
+import com.template.spring_backend_template.domain.auth.response.AuthResponse;
+import com.template.spring_backend_template.domain.auth.request.RegisterRequest;
 import com.template.spring_backend_template.domain.user.User;
 import com.template.spring_backend_template.domain.user.UserRoleEnum;
+import com.template.spring_backend_template.exceptions.UserException;
 import com.template.spring_backend_template.infra.security.TokenService;
 import com.template.spring_backend_template.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,20 +29,20 @@ public class AuthService {
     @Autowired
     private TokenService tokenService;
 
-    public String login(String login, String password) {
+    public AuthResponse login(String login, String password) {
 
         UsernamePasswordAuthenticationToken usernamePassword = new UsernamePasswordAuthenticationToken(
                 login,
                 password);
 
         Authentication auth = this.authenticationManager.authenticate(usernamePassword);
-        return tokenService.generateToken((User) auth.getPrincipal());
+        String token = tokenService.generateToken((User) auth.getPrincipal());
+        return new AuthResponse(token);
     }
 
     public void register(RegisterRequest registerRequest) {
         if(authorizationService.loadUserByUsername(registerRequest.email()) != null) {
-            // Todo : implementar um tratamento de exceptions
-            throw new RuntimeException("User already exists");
+            throw new UserException("Usuário já existe");
         }
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(registerRequest.password());
