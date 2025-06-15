@@ -1,4 +1,4 @@
-package com.template.spring_backend_template.infra.security;
+package com.template.spring_backend_template.common.infra.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

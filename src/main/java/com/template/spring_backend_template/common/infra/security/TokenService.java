@@ -1,4 +1,4 @@
-package com.template.spring_backend_template.infra.security;
+package com.template.spring_backend_template.common.infra.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;

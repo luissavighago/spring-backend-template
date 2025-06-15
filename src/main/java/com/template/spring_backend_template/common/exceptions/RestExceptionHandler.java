@@ -1,4 +1,4 @@
-package com.template.spring_backend_template.exceptions;
+package com.template.spring_backend_template.common.exceptions;
 
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.template.spring_backend_template.domain.RestErrorResponse;
