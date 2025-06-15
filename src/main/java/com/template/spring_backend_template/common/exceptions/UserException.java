@@ -1,4 +1,4 @@
-package com.template.spring_backend_template.exceptions;
+package com.template.spring_backend_template.common.exceptions;
 
 public class UserException extends RuntimeException {
 

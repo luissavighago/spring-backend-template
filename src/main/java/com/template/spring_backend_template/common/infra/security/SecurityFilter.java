@@ -1,4 +1,4 @@
-package com.template.spring_backend_template.infra.security;
+package com.template.spring_backend_template.common.infra.security;
 
 import com.template.spring_backend_template.repository.user.UserRepository;
 import jakarta.servlet.FilterChain;
